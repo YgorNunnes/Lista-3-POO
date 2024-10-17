@@ -27,8 +27,8 @@ export class Hospital{
 		this._codHospital = value;
 	}
 
-	get consultas(): Consulta[] {
-		return this._consultas;
+	get consultas(value:void||number): Consulta[] {
+		typeof value === void ? return this._consultas : return this._consultas[value];
 	}
 
 	set consultas(value: Consulta[]) {

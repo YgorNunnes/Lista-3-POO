@@ -21,8 +21,9 @@ export class Consulta{
         return this._receita;
     }
 
-    public GerarReceita(value: Medicamento[]) {
-		this._receita = new Receita(new Date(),value);
+    public GerarReceita(medicamento: Medicamento[]) {
+		this._receita = new Receita(this._medicoResponsavel,this._paciente,new Date(),medicamento);
+		this.status = "Realizada";
     }
 
     public get medicoResponsavel(): Medico {
