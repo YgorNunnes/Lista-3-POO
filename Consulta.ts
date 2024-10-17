@@ -1,47 +1,62 @@
+import { Medicamento } from "./Medicamento.ts";
 import { Medico } from "./Medico.ts";
 import { Paciente } from "./Paciente.ts";
+import { Receita } from "./Receita.ts";
 
 export class Consulta{
-    private _codigo: string;
+	private _receita: Receita;
     private _medicoResponsavel: Medico;
     private _paciente: Paciente;
-    private _dataDeEmissao: Date;
     private _dataMarcada: Date;
+	private _status: string = "Agendada";
 
-	constructor(codigo: string, medicoResponsavel: Medico, paciente: Paciente, dataDeEmissao: Date) {
-		this._codigo = codigo;
-		this._medicoResponsavel = medicoResponsavel;
-		this._paciente = paciente;
-		this._dataDeEmissao = dataDeEmissao;
-    }    
-	get codigo(): string {
-		return this._codigo;
-	}
-	get medicoResponsavel(): Medico {
-		return this._medicoResponsavel;
-	}
-	get paciente(): Paciente {
-		return this._paciente;
-	}
-	get dataDeEmissao(): Date {
-		return this._dataDeEmissao;
-	}
-    get dataMarcada() : Date {
+    constructor(receita: Receita, medicoResponsavel: Medico, paciente: Paciente, dataMarcada: Date){
+        this._receita = receita;
+        this._medicoResponsavel = medicoResponsavel;
+        this._paciente = paciente;
+        this._dataMarcada = dataMarcada;
+    }
+
+    public get receita(): Receita {
+        return this._receita;
+    }
+
+    public GerarReceita(value: Medicamento[]) {
+		this._receita = new Receita(new Date(),value);
+    }
+
+    public get medicoResponsavel(): Medico {
+        return this._medicoResponsavel;
+    }
+
+    public set medicoResponsavel(value: Medico) {
+        this._medicoResponsavel = value;
+    }
+
+    public get paciente(): Paciente {
+        return this._paciente;
+    }
+
+    public set paciente(value: Paciente) {
+        this._paciente = value;
+    }
+
+    public get dataMarcada(): Date {
         return this._dataMarcada;
     }
-	set codigo(value: string) {
-		this._codigo = value;
-	}
-	set medicoResponsavel(value: Medico) {
-		this._medicoResponsavel = value;
-	}
-	set paciente(value: Paciente) {
-		this._paciente = value;
-	}
-	set dataDeEmissao(value: Date) {
-		this._dataDeEmissao = value;
-	}
-    set dataMarcada (value: Date){
+
+    public set dataMarcada(value: Date) {
         this._dataMarcada = value;
     }
+	public get status(): string {
+		return this._status;
+	}
+
+	public set status(value: string) {
+		if (value == "Agendada" || value == "Realizada" || value == "Cancelada"){
+			this._status = value;
+		}else{
+			throw new Error("Status inválido");
+		}
+	}
 }
