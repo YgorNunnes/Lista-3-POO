@@ -14,34 +14,34 @@ export class Consulta{
 		this._paciente = paciente;
 		this._dataDeEmissao = dataDeEmissao;
     }    
-	public get codigo(): string {
+	get codigo(): string {
 		return this._codigo;
 	}
-	public get medicoResponsavel(): Medico {
+	get medicoResponsavel(): Medico {
 		return this._medicoResponsavel;
 	}
-	public get paciente(): Paciente {
+	get paciente(): Paciente {
 		return this._paciente;
 	}
-	public get dataDeEmissao(): Date {
+	get dataDeEmissao(): Date {
 		return this._dataDeEmissao;
 	}
-    public get dataMarcada() : Date {
+    get dataMarcada() : Date {
         return this._dataMarcada;
     }
-	public set codigo(value: string) {
+	set codigo(value: string) {
 		this._codigo = value;
 	}
-	public set medicoResponsavel(value: Medico) {
+	set medicoResponsavel(value: Medico) {
 		this._medicoResponsavel = value;
 	}
-	public set paciente(value: Paciente) {
+	set paciente(value: Paciente) {
 		this._paciente = value;
 	}
-	public set dataDeEmissao(value: Date) {
+	set dataDeEmissao(value: Date) {
 		this._dataDeEmissao = value;
 	}
-    public set dataMarcada (value: Date){
+    set dataMarcada (value: Date){
         this._dataMarcada = value;
     }
 }

@@ -1,36 +1,36 @@
 export class Paciente {
-    private nome: string;
-    private cpf: string;
-    private email: string;
+    private _nome: string;
+    private _cpf: string;
+    private _email: string;
     
 
-	constructor($nome: string, $cpf: string, $email: string) {
-		this.nome = $nome;
-		this.cpf = $cpf;
-		this.email = $email;
+	constructor(nome: string, cpf: string, email: string) {
+		this._nome = nome;
+		this._cpf = cpf;
+		this._email = email;
 	}
 
-	public get $nome(): string {
-		return this.nome;
+	get nome(): string {
+		return this._nome;
 	}
 
-	public get $cpf(): string {
-		return this.cpf;
+	get cpf(): string {
+		return this._cpf;
 	}
 
-	public get $email(): string {
-		return this.email;
+	get email(): string {
+		return this._email;
 	}
 
-	public set $nome(value: string) {
-		this.nome = value;
+	set nome(value: string) {
+		this._nome = value;
 	}
 
-	public set $cpf(value: string) {
-		this.cpf = value;
+	set cpf(value: string) {
+		this._cpf = value;
 	}
 
-	public set $email(value: string) {
-		this.email = value;
+	set email(value: string) {
+		this._email = value;
 	}
 }

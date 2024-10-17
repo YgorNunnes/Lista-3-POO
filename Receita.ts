@@ -1,40 +1,41 @@
-import { Sistema } from "./Sistema.ts";
+import { Hospital } from "./Hospital.ts";
 
 export class Receita{
-    private dataDeEmissao: Date;
-    private medicamentos: string[];
-    private codConsulta: string;
-    private codSistema: Sistema;
+    private _dataDeEmissao: Date;
+    private _medicamentos: string[];
+    private _codConsulta: string;
+    private _codHospital: Hospital;
 
-	constructor($dataDeEmissao: Date, $medicamentos: string[], $codConsulta: string, $codSistema: Sistema) {
-		this.dataDeEmissao = $dataDeEmissao;
-		this.medicamentos = $medicamentos;
-		this.codConsulta = $codConsulta;
-		this.codSistema = $codSistema;
+	constructor(dataDeEmissao: Date, medicamentos: string[], codConsulta: string, codHospital: Hospital) {
+		this._dataDeEmissao = dataDeEmissao;
+		this._medicamentos = medicamentos;
+		this._codConsulta = codConsulta;
+		this._codHospital = codHospital;
 	}
-	public get $dataDeEmissao(): Date {
-		return this.dataDeEmissao;
+	get dataDeEmissao(): Date {
+		return this._dataDeEmissao;
 	}
-	public get $medicamentos(): string[] {
-		return this.medicamentos;
+	get medicamentos(): string[] {
+		return this._medicamentos;
 	}
-	public get $codConsulta(): string {
-		return this.codConsulta;
+	get codConsulta(): string {
+		return this._codConsulta;
 	}
-	public get $codSistema(): Sistema {
-		return this.codSistema;
+	get codHospital(): Hospital {
+		return this._codHospital;
 	}
-	public set $dataDeEmissao(value: Date) {
-		this.dataDeEmissao = value;
+	set dataDeEmissao(value: Date) {
+		this._dataDeEmissao = value;
 	}
-	public set $medicamentos(value: string[]) {
-		this.medicamentos = value;
+	set medicamentos(value: string[]) {
+		this._medicamentos = value;
 	}
-	public set $codConsulta(value: string) {
-		this.codConsulta = value;
+	set codConsulta(value: string) {
+		this._codConsulta = value;
 	}
-	public set $codSistema(value: Sistema) {
-		this.codSistema = value;
+	set codHospital(value: Hospital) {
+		this._codHospital = value;
 	}
 
 }
+
