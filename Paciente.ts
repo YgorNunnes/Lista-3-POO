@@ -26,7 +26,9 @@ export class Paciente {
 		this.nome = value;
 	}
 
-	public set $cpf(value: string) {
+	if (value.length !== 11) {
+            throw new Error('CPF inválido. Deve ter exatamente 11 dígitos numéricos.');
+	} else {
 		this.cpf = value;
 	}
 
