@@ -59,12 +59,9 @@ export class Consulta{
 	}
 
 	public set status(value: string) {
-		if (value == "Agendada" || value == "Realizada" || value == "Cancelada"){
-			this._status = value;
-		}else{
-			throw new Error("Status inválido");
-		}
-	}
+		this.validarTransicaoStatus(value); 
+   		 this._status = value;
+	}	
 
 	private validarData(data: Date){
 		const hoje = new Date();
@@ -78,5 +75,24 @@ export class Consulta{
 		}
 		return;
 	}
+
+	private validarTransicaoStatus(novoStatus: string) {
+    		if (!["Agendada", "Realizada", "Cancelada"].includes(novoStatus)) {
+     	   throw new Error("Status inválido");
+  	  }
+
+    
+   	 if (this._status === "Agendada" && novoStatus === "Realizada") {
+      		  return; // Permite transição de Agendada para Realizada
+    	} else if (this._status === "Agendada" && novoStatus === "Cancelada") {
+     		   return; // Permite transição de Agendada para Cancelada
+    	} else if (this._status === "Realizada" && novoStatus === "Cancelada") {
+      		  throw new Error("Não é possível cancelar uma consulta já realizada.");
+  	} else if (this._status === novoStatus) {
+        	  throw new Error("O status já está definido como este.");
+   	 } else {
+        	  throw new Error("Transição de status inválida.");
+    	}
+    }
 	
 }
