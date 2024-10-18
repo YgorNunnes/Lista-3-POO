@@ -26,8 +26,12 @@ export class Paciente {
 		this._nome = value;
 	}
 
-	set cpf(value: string) {
-		this._cpf = value;
+	public set cpf(value: string) {
+		if (value.length !== 11) {
+            throw new Error('CPF inválido. Deve ter exatamente 11 dígitos numéricos.');
+		} else {
+			this._cpf = value;
+		}	
 	}
 
 	set email(value: string) {

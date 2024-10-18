@@ -26,7 +26,9 @@ export class Medico{
 	}
 
 	public set crm(value: string) {
-		this._crm = value;
+		if (this.crm === null || this.crm === undefined || this.crm.length > 6 ) {
+			throw new console.error("Crm inválido!");
+		} else this._crm = value;
 	}
 
 	public set email(value: string) {

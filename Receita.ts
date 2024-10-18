@@ -36,8 +36,12 @@ export class Receita{
 	}
 
 	set dataDeEmissao(value: Date) {
-		this._dataDeEmissao = value;
-	}
+        	const agora = new Date();
+        	if (value > agora) {
+            		throw new Error('Data de emissão não pode ser no futuro.');
+        	}
+       		 this._dataDeEmissao = value;
+    }
 
 	get medicamentos(): Medicamento[] {
 		return this._medicamentos;
