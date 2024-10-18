@@ -1,6 +1,6 @@
-import { Medicamento } from "./Medicamento.ts";
-import { Medico } from "./Medico.ts";
-import { Paciente } from "./Paciente.ts";
+import { Medicamento } from "./Medicamento";
+import { Medico } from "./Medico";
+import { Paciente } from "./Paciente";
 
 export class Receita{
 	private _medicoResponsavel: Medico;
