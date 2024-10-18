@@ -26,9 +26,9 @@ export class Consulta{
 	public get dataDeEmissao(): Date {
 		return this._dataDeEmissao;
 	}
-    public get dataMarcada() : Date {
-        return this._dataMarcada;
-    }
+   	 public get dataMarcada() : Date {
+       		 return this._dataMarcada;
+   	}
 	public set codigo(value: string) {
 		this._codigo = value;
 	}
@@ -39,9 +39,21 @@ export class Consulta{
 		this._paciente = value;
 	}
 	public set dataDeEmissao(value: Date) {
-		this._dataDeEmissao = value;
+		let hoje = new Date();
+
+		if (this.dataDeEmissao > hoje) {
+			throw new console.error("A data de emissão não pode ser no futuro!");
+		} else {
+			this.dataDeEmissao = value;
+		}
 	}
-    public set dataMarcada (value: Date){
-        this._dataMarcada = value;
-    }
+    	public set dataMarcada (value: Date){
+		let hoje = new Date();
+
+		if (this.dataMarcada < hoje) {
+			throw new console.error("A data deve ser marcada no futuro!");
+		} else {
+			this.dataMarcada = value;
+		}
+	}
 }
