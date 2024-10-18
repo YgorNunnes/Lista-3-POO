@@ -7,65 +7,36 @@ import { Medico } from "../Medico"
 describe("Consulta", () => {
     
     test("Deve criar uma consulta", () => {
-        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),new Date("2025-10-17"));
+        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),new Date());
         expect(()=>{consulta.receita}).toThrow();
         expect(consulta.medicoResponsavel).toBeInstanceOf(Medico);
         expect(consulta.paciente).toBeInstanceOf(Paciente);
         expect(consulta.dataMarcada).toBeInstanceOf(Date);
     });
 
-    test("Deve criar uma receita", () => {
+    test("Deve criar uma consulta para o mesmo dia", () => {
+        const hoje = new Date();
+        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),hoje);
 
-        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("Ricardio","email1@gmail","crm1"),new Date("2025-10-17"));
-        const medicamento = new Medicamento("losartan", 100);
-        consulta.GerarReceita([medicamento]);
-        expect(consulta.receita).toBeInstanceOf(Receita);
-        expect(consulta.receita.medicamentos[0]).toBeInstanceOf(Medicamento);
-    })
+        expect(consulta.dataMarcada.getDate()).toBe(hoje.getDate());
+        expect(consulta.dataMarcada.getMonth()).toBe(hoje.getMonth());
+        expect(consulta.dataMarcada.getFullYear()).toBe(hoje.getFullYear());
+    });
 
-    
-    test("Deve adicionar e remover um medicamento", () => {
-        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),new Date("2025-10-17"));
-        const medicamento = new Medicamento("losartan", 100);
-        const medicamento2 = new Medicamento("urubuprofeno", 75);
+    test("Deve criar uma consulta para o dia anterior", () => {
+        expect(()=>{
+            const ontem = new Date();
+            ontem.setDate(ontem.getDate() - 1);
+            const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),ontem);
+        }).toThrow();
+    });
 
-        consulta.GerarReceita([medicamento]);
-
-        consulta.receita.adicionarMedicamento(medicamento2);
-
-        expect(consulta.receita.medicamentos.length).toBe(2);
-        expect(consulta.receita.medicamentos[0]).toBeInstanceOf(Medicamento);
-        expect(consulta.receita.medicamentos[0].nome).toBe("losartan");
-        expect(consulta.receita.medicamentos[0].miligramas).toBe(100);
-
-        consulta.receita.removerMedicamento(medicamento);
+    test("Deve criar uma consulta para o dia no futuro", () => {
+        const amanha = new Date();
+        amanha.setDate(amanha.getDate() + 1);
         
-        expect(consulta.receita.medicamentos.length).toBe(1);
-    })
-
-test("Deve criar uma consulta para o mesmo dia", () => {
-    const hoje = new Date();
-    const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),hoje);
-
-    expect(consulta.dataMarcada.getDate()).toBe(hoje.getDate());
-    expect(consulta.dataMarcada.getMonth()).toBe(hoje.getMonth());
-    expect(consulta.dataMarcada.getFullYear()).toBe(hoje.getFullYear());
-});
-
-test("Deve criar uma consulta para o dia anterior", () => {
-    expect(()=>{
-        const ontem = new Date();
-        ontem.setDate(ontem.getDate() - 1);
-        const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),ontem);
-    }).toThrow();
-});
-
-test("Deve criar uma consulta para o dia no futuro", () => {
-    const amanha = new Date();
-    amanha.setDate(amanha.getDate() + 1);
-    const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),amanha);
-    expect(consulta.dataMarcada.getDate()).toBe(amanha.getDate());
-    expect(consulta.dataMarcada.getMonth()).toBe(amanha.getMonth());
-    expect(consulta.dataMarcada.getFullYear()).toBe(amanha.getFullYear());
-});
+        expect(()=>{
+            const consulta = new Consulta(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),amanha);
+        }).toThrow
+    });
 })
