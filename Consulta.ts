@@ -13,11 +13,16 @@ export class Consulta{
     constructor(medicoResponsavel: Medico, paciente: Paciente, dataMarcada: Date){
         this._medicoResponsavel = medicoResponsavel;
         this._paciente = paciente;
+		this.validarData(dataMarcada);
         this._dataMarcada = dataMarcada;
     }
 
     public get receita(): Receita {
-        return this._receita;
+		if(this._receita === undefined){
+			throw new Error("Receita não criada")
+		} else {
+			return this._receita;
+		}
     }
 
     public GerarReceita(medicamento: Medicamento[]) {
@@ -64,14 +69,14 @@ export class Consulta{
 	private validarData(data: Date){
 		const hoje = new Date();
 
-	if (
-		data.getFullYear() < hoje.getFullYear() ||
-		(data.getFullYear() === hoje.getFullYear() && data.getMonth() < hoje.getMonth()) ||
-		(data.getFullYear() === hoje.getFullYear() && data.getMonth() === hoje.getMonth() && data.getDate() < hoje.getDate())
-	) {
-		throw new Error("A data não pode ser anterior ao dia atual.");
-	}
-	return;
+		if (
+			data.getFullYear() < hoje.getFullYear() ||
+			(data.getFullYear() === hoje.getFullYear() && data.getMonth() < hoje.getMonth()) ||
+			(data.getFullYear() === hoje.getFullYear() && data.getMonth() === hoje.getMonth() && data.getDate() < hoje.getDate())
+		) {
+			throw new Error("A data não pode ser anterior ao dia atual.");
+		}
+		return;
 	}
 	
 }

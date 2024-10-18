@@ -3,7 +3,9 @@ export class Medicamento{
     private _miligramas:number;
 
 	constructor(nome: string, miligramas: number) {
-		this._nome = nome;
+		if (miligramas < 0) {   throw new Error("Miligramas inválidos");    }
+        
+        this._nome = nome;
 		this._miligramas = miligramas;
 	}
 
@@ -20,6 +22,9 @@ export class Medicamento{
 	}
 
 	public set miligramas(value: number) {
+        if (value < 0) {
+            throw new Error("Miligramas inválidos");
+        }
 		this._miligramas = value;
 	}
     
