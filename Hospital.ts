@@ -27,11 +27,18 @@ export class Hospital{
 		this._codHospital = value;
 	}
 
-	get consultas(value:void||number): Consulta[] {
-		typeof value === void ? return this._consultas : return this._consultas[value];
+	get consultas(): Consulta[] {
+		return this._consultas
 	}
 
-	set consultas(value: Consulta[]) {
-		this._consultas = value;
-	}
+    adicionarConsulta(consulta: Consulta): void {
+        this._consultas.push(consulta);
+    }
+
+    removerConsulta(consulta: Consulta): void {
+        const index = this._consultas.indexOf(consulta);
+        if (index !== -1) {
+            this._consultas.splice(index, 1);
+        }
+    }
 }

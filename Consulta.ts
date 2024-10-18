@@ -10,8 +10,7 @@ export class Consulta{
     private _dataMarcada: Date;
 	private _status: string = "Agendada";
 
-    constructor(receita: Receita, medicoResponsavel: Medico, paciente: Paciente, dataMarcada: Date){
-        this._receita = receita;
+    constructor(medicoResponsavel: Medico, paciente: Paciente, dataMarcada: Date){
         this._medicoResponsavel = medicoResponsavel;
         this._paciente = paciente;
         this._dataMarcada = dataMarcada;
@@ -47,6 +46,7 @@ export class Consulta{
     }
 
     public set dataMarcada(value: Date) {
+		this.validarData(value);
         this._dataMarcada = value;
     }
 	public get status(): string {
@@ -60,4 +60,18 @@ export class Consulta{
 			throw new Error("Status inválido");
 		}
 	}
+
+	private validarData(data: Date){
+		const hoje = new Date();
+
+	if (
+		data.getFullYear() < hoje.getFullYear() ||
+		(data.getFullYear() === hoje.getFullYear() && data.getMonth() < hoje.getMonth()) ||
+		(data.getFullYear() === hoje.getFullYear() && data.getMonth() === hoje.getMonth() && data.getDate() < hoje.getDate())
+	) {
+		throw new Error("A data não pode ser anterior ao dia atual.");
+	}
+	return;
+	}
+	
 }
