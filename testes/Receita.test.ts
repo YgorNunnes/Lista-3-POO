@@ -33,4 +33,23 @@ describe("Receita",()=>{
         expect(consulta.receita.medicamentos.length).toBe(1);
     })
 
+    
+    test("Deve falhar ao criar uma receita para uma data anterior a atual", () => {
+        let dataAnterior = new Date();
+        dataAnterior.setDate(dataAnterior.getDate() - 1);
+        
+        expect(() => {
+            let receita = new Receita(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),dataAnterior,[new Medicamento("loratidina", 10)]);
+        }).toThrow();
+    })
+    
+    test("Deve falhar ao criar uma receita para uma data posterior a atual", () => {
+        let dataPosterior = new Date();
+        dataPosterior.setDate(dataPosterior.getDate() + 1);
+        
+        expect(() => {
+            let receita = new Receita(new Medico("dr1","crm1","email1"),new Paciente("paciente1","email1","crm1"),dataPosterior,[new Medicamento("loratidina", 10)]);
+        }).toThrow();
+    })
+
 })

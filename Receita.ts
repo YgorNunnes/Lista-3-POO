@@ -8,10 +8,14 @@ export class Receita{
     private _dataDeEmissao: Date;
     private _medicamentos: Medicamento[];
 
-	constructor(medicoResponsavel: Medico, paciente: Paciente, dataDeEmissao: Date, medicamentos: Medicamento[]) {
+	constructor(medicoResponsavel: Medico, paciente: Paciente, dataMarcada: Date, medicamentos: Medicamento[]) {
 		this._medicoResponsavel = medicoResponsavel;
 		this._paciente = paciente;
-		this._dataDeEmissao = dataDeEmissao;
+		const hoje = new Date();
+		if(!(dataMarcada.getFullYear() === hoje.getFullYear() && dataMarcada.getMonth() === hoje.getMonth() && dataMarcada.getDate() === hoje.getDate())) {
+			throw new Error('Data de emissão não diferente da marcada.');
+		}
+		this._dataDeEmissao = new Date();
 		this._medicamentos = medicamentos;
 	}
 	
@@ -34,14 +38,6 @@ export class Receita{
 	get dataDeEmissao(): Date {
 		return this._dataDeEmissao;
 	}
-
-	set dataDeEmissao(value: Date) {
-        	const agora = new Date();
-        	if (value > agora) {
-            		throw new Error('Data de emissão não pode ser no futuro.');
-        	}
-       		 this._dataDeEmissao = value;
-    }
 
 	get medicamentos(): Medicamento[] {
 		return this._medicamentos;
